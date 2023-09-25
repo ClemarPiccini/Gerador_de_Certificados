@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "exceljs": "^4.3.0",
+    "officegen": "^0.6.5",
+    "xlsx": "^0.18.5"
+  }
+}
