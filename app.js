@@ -1,6 +1,11 @@
 const fs = require('fs');
-const PDF = require('pdfmake/build/pdfmake'); // Importe o pdfmake
-const PDF_Fonts = require('pdfmake/build/vfs_fonts'); // Importe os vfs_fonts
+const PDF = require('pdfmake/build/pdfmake');
+const PDF_Fonts = require('pdfmake/build/vfs_fonts');
+const ExcelJS = require('exceljs');
+const path = require('path');
+const { promisify } = require('util');
+
+const readFileAsync = promisify(fs.readFile);
 
 async function gerarCertificados() {
   // Carregue o arquivo ODS usando a biblioteca exceljs
@@ -57,13 +62,23 @@ async function gerarCertificados() {
       margin: [0, 5, 0, 5],
     },
   };
+  const headerImage = await readFileAsync(path.join(__dirname, 'Cabecalho.png'), 'base64');
+  const footerImage = await readFileAsync(path.join(__dirname, 'Rodape.png'), 'base64');
 
-  // Defina o documento PDF
+  // Defina o documento PDF com imagens no cabeçalho e no rodapé
   const docDefinition = {
     pageOrientation: 'landscape',
     content: certificados,
     styles: styles,
     pageMargins: [40, 40, 40, 40],
+    header: {
+      image: `data:image/png;base64,${headerImage}`,
+      width: 300, // Ajuste o tamanho da imagem conforme necessário
+    },
+    footer: {
+      image: `data:image/png;base64,${footerImage}`,
+      width: 300, // Ajuste o tamanho da imagem conforme necessário
+    },
   };
 
   // Defina o vfs para os fonts
