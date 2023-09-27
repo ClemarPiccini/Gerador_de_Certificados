@@ -1,7 +1,6 @@
 const fs = require('fs');
 const PDF = require('pdfmake/build/pdfmake');
 const PDF_Fonts = require('pdfmake/build/vfs_fonts');
-const ExcelJS = require('exceljs');
 const path = require('path');
 const { promisify } = require('util');
 
@@ -31,15 +30,24 @@ async function gerarCertificados() {
     if (rowIndex === 1) return; // Ignorar a primeira linha (cabeçalho)
 
     const nome = row.getCell(1).value; // Suponha que o nome esteja na primeira coluna
+    const workshop = row.getCell(2).value;
+    const dependencias = row.getCell(3).value;
+    const dia = row.getCell(4).value;
+    const mes = row.getCell(5).value;
+    const ano = row.getCell(6).value;
+    const duracao = row.getCell(7).value;
+    const dia2 = row.getCell(8).value;
+    const mes2 = row.getCell(9).value;
+    const ano2 = row.getCell(10).value;
 
     // Defina o conteúdo do certificado
     const modeloCertificado = [
       { text: 'O Instituto SENAI de Tecnologia em Mecatrônica confere o presente atestado a', style: 'header' },
       { text: nome, style: 'nome' },
-      { text: 'por sua participação no Workshop XXXXXXXXXXXXXXX, realizado nas dependências', style: 'paragrafo' },
-      { text: ' XXXXXXXXXXXXXXXXXXXXXXXXXXXX, no dia XX de XXXXX de 202X, com', style: 'paragrafo' },
-      { text: ' duração de XX horas.', style: 'paragrafo' },
-      { text: 'Caxias do Sul, XX de XXXXX de 202X.', style: 'data' },
+      { text: `por sua participação no Workshop ${workshop}, realizado nas dependências`, style: 'paragrafo' },
+      { text: ` ${dependencias}, no dia ${dia} de ${mes} de 202${ano}, com`, style: 'paragrafo' },
+      { text: ` duração de ${duracao} horas.`, style: 'paragrafo' },
+      { text: `Caxias do Sul, ${dia2} de ${mes2} de 202${ano2}.`, style: 'data' },
       { text: '', pageBreak: 'after' }, // Quebra de página após cada certificado
     ];
 
