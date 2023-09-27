@@ -36,10 +36,10 @@ async function gerarCertificados() {
     const modeloCertificado = [
       { text: 'O Instituto SENAI de Tecnologia em Mecatrônica confere o presente atestado a', style: 'header' },
       { text: nome, style: 'nome' },
-      { text: 'por sua participação no Workshop XXXXXXXXXXXXXXX,', style: 'paragrafo' },
-      { text: 'realizado nas dependências XXXXXXXXXXXXXXXXXXXXXXXXXXXX,', style: 'paragrafo' },
-      { text: 'no dia XX de XXXXX de 202X, com duração de XX horas.', style: 'paragrafo' },
-      { text: 'Caxias do Sul, XX de XXXXX de 202X.', style: 'paragrafo' },
+      { text: 'por sua participação no Workshop XXXXXXXXXXXXXXX, realizado nas dependências', style: 'paragrafo' },
+      { text: ' XXXXXXXXXXXXXXXXXXXXXXXXXXXX, no dia XX de XXXXX de 202X, com', style: 'paragrafo' },
+      { text: ' duração de XX horas.', style: 'paragrafo' },
+      { text: 'Caxias do Sul, XX de XXXXX de 202X.', style: 'data' },
       { text: '', pageBreak: 'after' }, // Quebra de página após cada certificado
     ];
 
@@ -48,21 +48,25 @@ async function gerarCertificados() {
 
   const styles = {
     header: {
-      fontSize: 14,
-      bold: true,
+      fontSize: 18,
       alignment: 'center', // Centralize o texto
-      margin: [0, 150, 0, 0], // Margem superior maior para o cabeçalho
+      margin: [0, 130, 0, 0], // Margem superior maior para o cabeçalho
     },
     nome: {
       fontSize: 22,
       bold: true,
       alignment: 'center', // Centralize o texto
-      margin: [0, 120, 0, 0], // Margem superior maior para o nome
+      margin: [0, 40, 0, 40], // Margem superior maior para o nome
     },
     paragrafo: {
       fontSize: 18,
       margin: [0, 5, 0, 5],
       alignment: 'center', // Centralize o texto
+    },
+    data: {
+      fontSize: 18,
+      margin: [0, 20, 0, 5],
+      alignment: 'right', // Centralize o texto
     },
   };
   
@@ -82,7 +86,7 @@ async function gerarCertificados() {
     footer: {
       image: `data:image/png;base64,${footerImage}`,
       width: 300, // Largura da página A4 no modo paisagem
-      margin: [300, 0, 0, 0], // Remova as margens do rodapé
+      margin: [300, -20, 0, 0], // Remova as margens do rodapé
     },
   };
   
