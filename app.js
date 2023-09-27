@@ -46,26 +46,29 @@ async function gerarCertificados() {
     certificados.push(modeloCertificado);
   });
 
-  // Defina os estilos para o PDF
   const styles = {
     header: {
       fontSize: 14,
       bold: true,
+      alignment: 'center', // Centralize o texto
+      margin: [0, 150, 0, 0], // Margem superior maior para o cabeçalho
     },
     nome: {
-      fontSize: 16,
+      fontSize: 22,
       bold: true,
-      margin: [0, 10, 0, 10],
+      alignment: 'center', // Centralize o texto
+      margin: [0, 120, 0, 0], // Margem superior maior para o nome
     },
     paragrafo: {
-      fontSize: 12,
+      fontSize: 18,
       margin: [0, 5, 0, 5],
+      alignment: 'center', // Centralize o texto
     },
   };
+  
   const headerImage = await readFileAsync(path.join(__dirname, 'Cabecalho.png'), 'base64');
   const footerImage = await readFileAsync(path.join(__dirname, 'Rodape.png'), 'base64');
 
-  // Defina o documento PDF com imagens no cabeçalho e no rodapé
   const docDefinition = {
     pageOrientation: 'landscape',
     content: certificados,
@@ -73,13 +76,16 @@ async function gerarCertificados() {
     pageMargins: [40, 40, 40, 40],
     header: {
       image: `data:image/png;base64,${headerImage}`,
-      width: 300, // Ajuste o tamanho da imagem conforme necessário
+      width: 842, // Largura da página A4 no modo paisagem
+      margin: [0, 0, 0, 0], // Remova as margens do cabeçalho
     },
     footer: {
       image: `data:image/png;base64,${footerImage}`,
-      width: 300, // Ajuste o tamanho da imagem conforme necessário
+      width: 300, // Largura da página A4 no modo paisagem
+      margin: [300, 0, 0, 0], // Remova as margens do rodapé
     },
   };
+  
 
   // Defina o vfs para os fonts
   PDF.vfs = PDF_Fonts.pdfMake.vfs;
