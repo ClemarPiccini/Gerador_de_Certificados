@@ -17,7 +17,7 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors('*'));
 
 const upload = multer({ dest: 'uploads/' }); 
 app.post('/gerarCertificados', upload.single('arquivoExcel'), async (req, res) => {
