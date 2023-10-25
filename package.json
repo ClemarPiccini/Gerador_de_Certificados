@@ -1,7 +1,19 @@
 {
   "dependencies": {
-    "exceljs": "^4.3.0",
+    "exceljs": "^4.4.0",
     "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
     "pdfmake": "^0.2.7"
-  }
+  },
+  "name": "certificado",
+  "description": "Projeto para automatizar a geração de certificados da empresa SENAI-RS.   Neste projeto utilizei as bibliotecas exceljs e PDFmake, onde busco os dados de um arquivo excel    e faço as inserções dos dados em seus respectivos locais. Ao final é gerado um documento em PDF    com todos os Certificados gerados.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon ./src/app.js"
+  },
+  "author": "",
+  "license": "ISC"
 }

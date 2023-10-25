@@ -13,4 +13,4 @@ com todos os Certificados gerados.
 
 ```npm install```
 
-```node app.js```
+```npm start```

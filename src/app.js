@@ -8,18 +8,24 @@ const path = require('path');
 const ExcelJS = require('exceljs');
 const os = require('os');
 const { v4: uuidv4 } = require('uuid');
+const multer = require('multer');
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 app.use(express.json());
-
-app.get('/gerarCertificados', async (req, res) => {
+const upload = multer({ dest: 'uploads/' }); 
+app.post('/gerarCertificados', upload.single('arquivoExcel'), async (req, res) => {
   try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhum arquivo Excel foi enviado.' });
+    }
+
+    const excelFilePath = req.file.path;
     const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile('Sheet1.xlsx');
+    await workbook.xlsx.readFile(excelFilePath);
     const worksheet = workbook.getWorksheet(1);
     const certificados = [];
     const pageLayout = {
