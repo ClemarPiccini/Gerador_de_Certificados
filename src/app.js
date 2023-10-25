@@ -9,6 +9,7 @@ const ExcelJS = require('exceljs');
 const os = require('os');
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
+const cors = require('cors');
 
 const port = 3000;
 
@@ -16,6 +17,8 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 app.use(express.json());
+app.use(cors());
+
 const upload = multer({ dest: 'uploads/' }); 
 app.post('/gerarCertificados', upload.single('arquivoExcel'), async (req, res) => {
   try {
